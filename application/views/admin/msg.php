@@ -1,0 +1,3 @@
+<div class="alert alert-success">
+	Profile Update Successfuly...
+</div>

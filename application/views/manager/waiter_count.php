@@ -1,0 +1,1 @@
+<b style="font-size:.6em"><?php if($free_waiters['count']) echo $free_waiters['count']; else echo "0";?>/<?php if($waiters['count']) echo $waiters['count'];?></b>

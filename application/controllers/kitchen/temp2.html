@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Welcome to Biryani House</title>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'assets/css/bootstrap.css'; ?>" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'assets/css/bootstrap-responsive.css'; ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'assets/css/main.css'; ?>" />
+		<link rel="stylesheet" href="<?php echo base_url() . 'assets/css/validationEngine.jquery.css'; ?>" type="text/css"/>
+		<script type="text/javascript" src="<?php echo base_url() . 'assets/js/jquery-1.7.1.min.js'; ?>"></script>
+		<script type="text/javascript" src="<?php echo base_url() . 'assets/js/bootstrap.js'; ?>"></script>
+		<script type="text/javascript" src="<?php echo base_url() . 'assets/js/general.js'; ?>"></script>
+		<script src="<?php echo base_url() . 'assets/js/jquery.validationEngine-en.js'; ?>" type="text/javascript" charset="utf-8"></script>
+		<script src="<?Php echo base_url() . 'assets/js/jquery.validationEngine.js'; ?>" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+
+
+
+		function processForm() {
+			//get form variables
+			
+			var thepercentage = form1.min_limit.options[form1.min_limit.selectedIndex].value;
+			var quantity = document.getElementById( "quantity" ).value;
+			var countper = document.getElementById( "countpercent" );
+			
+			//Calculate Percent
+			percentage = (thepercentage * quantity) / 100;	
+			countper.value =  Math.round(percentage);
+			
+			document.getElementById('countpercent').setAttribute('value',Math.round(percentage));
+			document.getElementById('countpercent2').setAttribute('value',Math.round(percentage));
+		     
+			
+			}
+
+		</script>
+
+
+
+
+
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#tablesetupform').validationEngine();	
+		
+			});
+
+			
+		</script>
+	</head>
+	<body>
+	<?php 
+if(isset($ing_info) && !empty($ing_info)){
+	 foreach ($ing_info as $ing) {
+	$id = $ing->id; 	
+$name = $ing->name;
+$quantity = $ing->quantity;
+$min_ingr = $ing->min_ingr;
+
+}
+}else{
+$name = set_value('name');
+$quantity = set_value('quantity');
+$id = set_value('id');
+$min_ingr = set_value('min_ingr');
+}
+	?>
+		<div class="titlebar" style="margin-bottom: 100px;">
+			<span class="title">HOGO</span>
+		</div>
+		<?php echo $header; ?>
+		<div class="container-fluid">
+			<div class="welcome-outer rounded-6px">
+				<div class="welcome-inner rounded-4px">
+					<h3 style="text-align:center"><?php if(isset($id)&&!empty($id)){echo "Update";}else{ echo "Add";}?> Ingredients</h3>
+					<?php if ($this->session->flashdata('successmsg') != ''): ?>
+					    <div class="alert">
+						    <button type="button" class="close" data-dismiss="alert">&times;</button>
+						    <?php echo $this->session->flashdata('successmsg'); ?>
+						</div>
+					<?php endif; ?>
+					<form class="form-horizontal" id="tablesetupform" name="form1" method="post" action="<?php echo site_url('kitchen/ingredients/add'); ?>">
+						<div class="control-group">
+						<input type="hidden" id="id" value="<?php echo $id; ?>" class="" name="id" />
+
+							<label class="control-label" for="tabletnumber">Ingredients</label>
+							<div class="controls">
+								
+								<div class='search-form'>
+
+
+					<select name='name' id="name">
+						
+						<?php
+					
+						foreach ($ingr_name as $ing) {
+						
+						?>
+
+						<option value="<?php echo $ing->name;?>"><?php echo $ing->name;?></option>
+
+
+
+						<?php }
+
+
+						?>
+
+					</select>
+					</div>
+								<!-- <input type="text" value="<?php echo $name; ?>" id="devicenumber" class="validate[required]" name="name" /> -->
+
+								
+							</div>
+							<br/>
+							<label class="control-label" for="tabletnumber">Quantity</label>
+							<div class="controls">
+								<input type="text" value="<?php echo $quantity; ?>" id="quantity" class="validate[required]" name="quantity" />
+							</div>
+<br/>
+						<?php if(!isset($minus)&&empty($minus))
+									{ 
+										?>
+
+							<label class="control-label" for="tabletnumber"  >Minimum Limits</label>
+
+							<div class="controls" onchange="processForm()">
+								<select name="min_limit" class="validate[required]"
+								<?php if(isset($minus)&&!empty($minus))
+									{ echo "disabled";	}?> 
+							>
+								<option value="">Select</option>
+
+								<option value="5">5%</option>
+								<option value="10">10%</option>
+								<option value="20">20%</option>
+								<option value="30">30%</option>
+								<option value="40">40%</option>
+								<option value="50">50%</option>
+								<option value="60">60%</option>
+								<option value="70">70%</option>
+								<option value="80">80%</option>
+								<option value="90">90%</option>
+
+								</select>
+
+							</div>
+
+							<br/>
+							<label class="control-label" for="tabletnumber">Limit</label>
+							<div class="controls">
+								<input type="text" id="countpercent" value="<?php echo $min_ingr; ?>" class="" name="" disabled />
+								<input type="hidden" id="countpercent2" value="" class="" name="countpercent1" <?php if(isset($minus)&&!empty($minus))
+									{ echo "disabled";	}?>  />
+							</div>
+
+							<?php }?>
+
+							
+							
+
+							
+						</div>
+						<div class="form-actions nobottomspace" style="padding-left:0;text-align:center;background-color:inherit;border-color:#99A2B6">
+							<a href="#" onclick="$('#tablesetupform').submit()" class="btn btn-large"><i class="icon-ok"></i> Save</a>
+							&nbsp;&nbsp;&nbsp;
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

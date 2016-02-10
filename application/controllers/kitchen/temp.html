@@ -1,0 +1,102 @@
+<?php if (! defined('BASEPATH')) exit('No direct script access allowed');
+/**
+* @author David Adamo Jr.
+*/
+class ingredients extends CI_Controller {
+	public $data;
+
+	public function __construct()
+	{
+		parent::__construct();
+		$this->data['dependencies'] = $this->load->view('general/dependencies', '', TRUE);
+		$this->data['header'] = $this->load->view('kitchen/header', '', TRUE);
+		$this->data['deleteconfirm'] = $this->load->view('kitchen/deleteconfirmation', '', TRUE);
+
+		$this->load->model('ingredient_model', 'ingredients');
+	}
+
+	public function index()
+	{
+		$this->data['ingr_name'] = $this->ingredients->get_ingr();
+		$this->data['ingredients'] = $this->ingredients->get_ingredients();
+		$this->load->view('kitchen/list_ingredients',$this->data);
+	}
+	public function get_ingredients()
+	{
+
+		$this->data['ingredients'] = $this->ingredients->get_ingredients();
+		$this->load->view('kitchen/ingredients',$this->data);
+	}
+	
+	public function add($id='')
+	{
+		if(isset($_POST) && !empty($_POST))
+		{
+			$this->load->library('form_validation');
+
+			$this->form_validation->set_rules('id', 'ID', 'trim');
+			$this->form_validation->set_rules('name', 'name', 'required|trim');
+			$this->form_validation->set_rules('min_limit', 'min_limit', 'required|trim');
+			$this->form_validation->set_rules('quantity', 'quantity', 'required|trim');
+
+			if ($this->form_validation->run() == FALSE)
+			{
+			$this->load->view('kitchen/ingredients', $this->data);
+			}
+			 else
+			 {
+				if(isset($id) && !empty($id))
+				{
+				$this->ingredients->update_ingredient();
+				$this->session->set_flashdata('successmsg', "Update ingredient successfully.");
+				}
+				
+				redirect('kitchen/ingredients');
+			}
+		}else{
+			
+		if(isset($id) && !empty($id)){
+			$this->data['ing_info'] = $this->ingredients->get_ingr_by_id($id);
+			}
+
+			$this->load->view('kitchen/ingredients', $this->data);
+		}
+
+	}
+
+public function filter($id)
+	{
+		if($id!='All'){
+			$this->data['ingr_name'] = $this->ingredients->get_ingr();
+			$this->data['ingredients'] = $this->ingredients->get_ingr_by_id($id);
+			$this->load->view('kitchen/list_ingredients', $this->data);
+		}else
+		redirect('kitchen/ingredients');
+			
+	}
+	// public function edit($ingredientid)
+	// {
+	// 	$this->load->library('form_validation');
+
+	// 	$this->form_validation->set_rules('name', 'name', 'required');
+
+	// 	if ($this->form_validation->run() == FALSE){
+	// 		$this->data['ingredients'] = $this->ingredients->get_ingredients($ingredientid);
+	// 		$this->load->view('manager/editingredient', $this->data);
+	// 	} else {
+	// 		//insert the ingredient into the database
+	// 		$this->ingredients->edit_ingredient($ingredientid);
+			
+	// 		$this->session->set_flashdata('successmsg', "Menu ingredient successfully updated.");
+	// 		redirect('manager/ingredient');
+	// 	}
+	// }
+
+	// function delete($ingredientid)
+	// {
+	// 	$this->ingredients->delete_ingredient($ingredientid);
+	// 	$this->session->set_flashdata('successmsg', 'ingredient successfully deleted.');
+	// 	redirect('manager/ingredient');
+
+	// }
+}

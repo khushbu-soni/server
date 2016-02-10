@@ -1,0 +1,1 @@
+<b style="font-size:.3em;"><?php if($today_payment['today_pay']) echo $today_payment['today_pay']; else echo "<spnn style='font-size:3em;'>0</span>";?></b>

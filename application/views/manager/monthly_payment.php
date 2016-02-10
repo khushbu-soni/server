@@ -1,0 +1,1 @@
+<b style="font-size:.3em"><?php if($monthly_payment['month_pay']) echo $monthly_payment['month_pay']; else echo "<spnn style='font-size:3em;'>0</span>";?></b>
