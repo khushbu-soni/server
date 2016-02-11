@@ -27,8 +27,8 @@
 <?php
 $background_url=base_url() . 'assets/img/table1.png';
 // print_r($total_bill_amount);
-echo "<span style='color:pink'>Today Total Bill Amount Due :: <b>".$total_bill_amount['bill_amount']."</b></span><br/>";
-echo "<span style='color:skyblue;'>Today Total Bill Clear :: <b>".$total_bill_pay['bill_amount']."</b></span>";
+echo "<span style='color:pink'>Today Total Bill Amount Due :: <b>".round($total_bill_amount['bill_amount'],2)."</b></span><br/>";
+echo "<span style='color:skyblue;'>Today Total Bill Clear :: <b>".round($total_bill_pay['bill_amount'],2)."</b></span>";
 // echo "Today Total Bill Clear:: ".$total_bill_pay['bill_amount'];
 ?>
 
@@ -64,7 +64,7 @@ background-size:90% 67%; background-repeat:no-repeat;background-position: center
   
   <?php if(in_array($i,$used_table_array)) echo "<p style='position: relative;
 top: 16px;
-right: 20px;'>".$table_bill_amount[$i]['bill_amount']."</p>"?>;
+right: 20px;'>".round($table_bill_amount[$i]['bill_amount'],2)."</p>"?>;
 </button>
 
 <?php

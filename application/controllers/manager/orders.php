@@ -118,8 +118,12 @@ class Orders extends CI_Controller {
 			$tablenumber=$this->order->get_tablenumber_by_order($_GET['order']);
 			
 			if($tablenumber['tablenumber']){
-				if($this->table->mark_Unused($tablenumber['tablenumber']))
+				
+				// $this->table->mark_Unused($tablenumber['tablenumber']);
+				// 	echo $this->db->last_query();
+				if($this->table->mark_Unused($tablenumber['tablenumber'])){
 					$this->order->delete_by_id($_GET['order']);
+				}
 					else
 						echo "string";	
 			}			

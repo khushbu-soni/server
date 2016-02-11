@@ -310,11 +310,21 @@ class table_model extends CI_Model{
     }
 
     public function get_used_tables(){
-        $query=$this->db->query("SELECT DISTINCT(`table`.tablenumber),`staff`.fname as waiter_name
-        FROM 
-            `table`
-            JOIN staff on staff.id=`table`.waiter_id
-            JOIN orderitem on `table`.tablenumber=orderitem.table_no WHERE `table`.inuse=1");
+        // $query=$this->db->query("SELECT DISTINCT(`table`.tablenumber),`staff`.fname as waiter_name
+        // FROM 
+        //     `table`
+        //     JOIN staff on staff.id=`table`.waiter_id
+        //     JOIN orderitem on `table`.tablenumber=orderitem.table_no WHERE `table`.inuse=1");
+        $query=$this->db->query("SELECT DISTINCT
+    (`table`.tablenumber),
+    `staff`.fname AS waiter_name
+FROM
+    `table`
+JOIN `order` on `order`.tablenumber=`table`.tablenumber
+JOIN staff ON staff.id = `table`.waiter_id
+JOIN orderitem ON `table`.tablenumber = orderitem.table_no
+WHERE
+    `table`.inuse = 1");
         return $query->result_array();
     }
     public function get_all(){

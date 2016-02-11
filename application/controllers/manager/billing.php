@@ -139,7 +139,9 @@ class Billing extends CI_Controller {
 				// exit();
 					$this->orders->paid($this->input->post('order_id'));
 					$this->orderitems->update_status($this->input->post('order_id'));
-					$this->table->mark_Unused($_POST['tablenumber']);	
+
+					$this->table->mark_Unused($_POST['tablenumber']);
+					echo $this->db->last_query();	
 					$this->transaction->insert_transaction($this->input->post('order_id'),$amount,$date,'Received',$narration);		
 					
 				$this->session->set_flashdata('successmsg', "paid successfully Updated.");

@@ -13,6 +13,7 @@ foreach ($this->data['orders'] as $order) :?>
                                     <span class="glyphicon glyphicon-ok glyphicon-lg"></span>
                                     <h5>
                                         <?php
+                                        // print_r($order);
                                         if($order['customername']!='' and $order['tablenumber']==0)
                                             echo "<b>Customer<br/><small>( Take Away )</small></b> <br/>".$order['customername'];
                                         elseif ($order['tablenumber']!=0) {

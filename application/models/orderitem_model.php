@@ -189,24 +189,42 @@ class orderitem_model extends CI_Model{
  
     public function table_bill_amount($tablenumber){
 
-        $query=$this->db->query("SELECT (SUM(price)*quantity) as bill_amount FROM `table` join orderitem on orderitem.table_no=`table`.tablenumber WHERE orderitem.table_no='".$tablenumber."' AND `table`.inuse=1"); 
+        // $query=$this->db->query("SELECT (SUM(price)*quantity) as bill_amount FROM `table` join orderitem on orderitem.table_no=`table`.tablenumber WHERE orderitem.table_no='".$tablenumber."' AND `table`.inuse=1"); 
+        $query=$this->db->query("SELECT
+    SUM(orderitem.price)*orderitem.quantity as bill_amount
+FROM
+    `table`
+JOIN `order` ON `order`.tablenumber= `table`.tablenumber
+JOIN orderitem ON orderitem.table_no = `table`.tablenumber
+
+WHERE
+     orderitem.table_no='".$tablenumber."'
+AND `table`.inuse = 1
+AND `order`.date=CURRENT_DATE()
+"); 
         return $query->row_array();
     }
 
      public function total_bill_amount(){
 
-        $query=$this->db->query("SELECT SUM(price) as bill_amount FROM `table` join orderitem on orderitem.table_no=`table`.tablenumber WHERE  `table`.inuse=1"); 
+        // $query=$this->db->query("SELECT SUM(price) as bill_amount FROM `table` join orderitem on orderitem.table_no=`table`.tablenumber WHERE  `table`.inuse=1"); 
+        $query=$this->db->query("SELECT SUM(orderitem.price)*orderitem.quantity as bill_amount FROM `table`
+ join 
+`order` ON `order`.tablenumber=`table`.tablenumber
+JOIN
+orderitem on orderitem.table_no=`table`.tablenumber WHERE `table`.inuse=1"); 
         return $query->row_array();
     }
 
       public function total_bill_pay(){
 
         $query=$this->db->query("SELECT
-SUM(amount) as bill_amount 
+SUM(payment.amount) as bill_amount
 FROM `order` 
 JOIN `table` on `table`.tablenumber=`order`.tablenumber
 JOIN payment on payment.tablenumber=`order`.tablenumber
-where `order`.payment_status=1 and `table`.inuse=0"); 
+where `order`.payment_status=1 and `table`.inuse=0
+AND `order`.date=CURRENT_DATE()"); 
         return $query->row_array();
     }
  

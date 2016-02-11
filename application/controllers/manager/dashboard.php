@@ -499,10 +499,11 @@ X
 	{
 
 		$this->data['orders'] = $this->orders->get_order_details();
-		echo $this->db->last_query();
+		// echo $this->db->last_query();
 		$this->data['ordereditems'] = $this->orders->get_order_item_process();	
 		$this->load->view('manager/order_slip',$this->data);
 	}
+	
 	public function customer_order_call($id)
 	{
 
@@ -628,15 +629,16 @@ X
 		// $this->data['total_bill_amount_due']=$this->configruation->get_all();
 
 		$this->data['used_tables']=$this->table->get_used_tables();
+		// echo $this->db->last_query();
 		$table_bill_array=array();
 		foreach ($this->data['used_tables'] as $used_tables) {
 			
 			$table_bill_array[$used_tables['tablenumber']]=$this->orderitem->table_bill_amount($used_tables['tablenumber']);
 			// $this->data['table_bill_amount']=$this->orderitem->table_bill_amount($used_tables['tablenumber']);
+		// echo $this->db->last_query();
 		}
 		
 		$this->data['total_bill_amount']=$this->orderitem->total_bill_amount();
-		echo $this->db->last_query();
 		$this->data['total_bill_pay']=$this->orderitem->total_bill_pay();
 		$this->data['table_bill_amount']=$table_bill_array;
 		$this->data['free_waiters']=$this->staff->get_free_waiter();
