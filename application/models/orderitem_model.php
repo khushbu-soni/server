@@ -200,6 +200,8 @@ JOIN orderitem ON orderitem.table_no = `table`.tablenumber
 WHERE
      orderitem.table_no='".$tablenumber."'
 AND `table`.inuse = 1
+AND orderitem.`status`=0
+
 AND `order`.date=CURRENT_DATE()
 "); 
         return $query->row_array();
@@ -212,7 +214,7 @@ AND `order`.date=CURRENT_DATE()
  join 
 `order` ON `order`.tablenumber=`table`.tablenumber
 JOIN
-orderitem on orderitem.table_no=`table`.tablenumber WHERE `table`.inuse=1"); 
+orderitem on orderitem.table_no=`table`.tablenumber WHERE `table`.inuse=1 AND orderitem.status=0"); 
         return $query->row_array();
     }
 
@@ -223,7 +225,7 @@ SUM(payment.amount) as bill_amount
 FROM `order` 
 JOIN `table` on `table`.tablenumber=`order`.tablenumber
 JOIN payment on payment.tablenumber=`order`.tablenumber
-where `order`.payment_status=1 and `table`.inuse=0
+where `order`.payment_status=1 and `table`.inuse=0 AND order.status=0
 AND `order`.date=CURRENT_DATE()"); 
         return $query->row_array();
     }

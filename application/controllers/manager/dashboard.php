@@ -639,6 +639,7 @@ X
 		}
 		
 		$this->data['total_bill_amount']=$this->orderitem->total_bill_amount();
+		// echo $this->db->last_query();
 		$this->data['total_bill_pay']=$this->orderitem->total_bill_pay();
 		$this->data['table_bill_amount']=$table_bill_array;
 		$this->data['free_waiters']=$this->staff->get_free_waiter();
