@@ -75,7 +75,7 @@ foreach ($orders_details as $val) {
                         
                         <tr>
                         
-                            <td colspan="4"><center><?php echo $basic_info->address;?><br/>Phone: <?php echo $basic_info->contact;?></center><center></center>
+                            <td colspan="4"><center><?php echo $basic_info->address;?><br/>P: <?php echo $basic_info->contact;?></center><center>W: biryanihouseuganda.com</center>
                           </td>
                         </tr>
                      
@@ -151,7 +151,7 @@ foreach ($orders_details as $val) {
                         
                         <tr>
                         
-                            <td colspan="4" style="text-align:center">POS Provided by <b>www.jdiafrica.com</b><br>+256-786222064&nbsp;<b>Tin No.00000000<b>
+                            <td colspan="4" style="text-align:center">POS Provided by <b>www.algolafrica.com</b><br>+256-786222064&nbsp;
                           </td>
                             </tr>
                             
