@@ -75,9 +75,12 @@ foreach ($orders_details as $val) {
                         
                         <tr>
                         
-                            <td colspan="4"><center><?php echo $basic_info->address;?><br/>P: <?php echo $basic_info->contact;?></center><center>W: biryanihouseuganda.com</center>
+                            <td colspan="4"><center><?php echo $basic_info->address;?><br/></center>
+                                <center><p style="font-size:8px;"> P: <?php echo $basic_info->contact;?>&nbsp;W: www.biryanihouseuganda.com</p></center>
                           </td>
+                          
                         </tr>
+                         
                      
                          <tr>
                         
@@ -137,11 +140,11 @@ foreach ($orders_details as $val) {
                         
                         <tr id="with_tax" >
                             
-                            <td colspan="4"  style="font-weight:bold;text-align:right">Eat In Total <?php echo "<span style=''>&nbsp;&nbsp;&nbsp;$basic_info->currency ".round($totals['total'],2)."</span> ";?></td>
+                            <td colspan="4"  style="font-weight:bold;text-align:right"> Total <?php echo "<span style=''>&nbsp;&nbsp;&nbsp;$basic_info->currency ".round($totals['total'],2)."</span> ";?></td>
                         </tr>
                          <tr >
                            
-                            <td colspan="4" style="font-weight:bold;text-align:right">Cash Tendered <?php echo $cash_tendered;?>
+                            <td colspan="4" style="font-weight:bold;text-align:right">Cash Given <?php echo $cash_tendered;?>
                             </td>
                         </tr>
                          <tr >
@@ -157,7 +160,7 @@ foreach ($orders_details as $val) {
                             
                         
                         <tr>
-                            <td colspan="4" style="text-align:center"><b>**** THANKS YOU FOR VISIT ****</b>
+                            <td colspan="4" style="text-align:center"><b>**** THANK YOU FOR VISIT ****</b>
                           </td>
                         </tr>
                         
