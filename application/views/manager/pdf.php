@@ -154,7 +154,7 @@ foreach ($orders_details as $val) {
                         
                         <tr>
                         
-                            <td colspan="4" style="text-align:center">POS Provided by <b>www.algolafrica.com</b><br>+256-786222064&nbsp;
+                            <td colspan="4" style="text-align:center">POS Provided by <b>www.algolafrica.com</b><br><?php echo $basic_info->contact;?>&nbsp;
                           </td>
                             </tr>
                             
