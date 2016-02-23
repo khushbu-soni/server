@@ -179,7 +179,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td><b>Eat In Total  </b></td>
+                            <td><b>Total  </b></td>
                             <td id="with_tax"><input type="text" style="width: 67px; height:auto" value="<?php echo $this->data['totals_with_tax'];?>" name="total_with_tax" readonly/></td>
                             <td id="without_tax"><input style="width: 67px;height:auto" type="text" value="<?php echo round($totals_without_tax['total'],2);?>" name="total_without_tax" readonly/></td>
                             <td>
@@ -190,7 +190,7 @@
 
                         <tr>
                             <td></td>
-                            <td><b>Cash Tendered</b></td>
+                            <td><b>Cash Given</b></td>
                             <td>
                             <input type="number" id="cash" style="width: 67px; height:auto" value="" name="cash" /></td>
                            

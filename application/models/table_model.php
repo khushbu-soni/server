@@ -61,7 +61,8 @@ class table_model extends CI_Model{
         
         if ($this->db->affected_rows() > 0)
             return TRUE;
-        return FALSE; 
+        else
+            return FALSE; 
     }
 
     public function is_table_assign($tablenumber){

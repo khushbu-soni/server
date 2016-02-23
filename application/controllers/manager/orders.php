@@ -110,6 +110,7 @@ class Orders extends CI_Controller {
 	}
 
 	public function delete_order(){
+
 			$this->load->model('orderitem_model','orderitem');
 			$this->load->model('order_model','order');
 			$this->load->model('table_model','table');
@@ -117,10 +118,14 @@ class Orders extends CI_Controller {
 			$orderitem=$this->orderitem->delete_by_id($_GET['order']);
 			$tablenumber=$this->order->get_tablenumber_by_order($_GET['order']);
 			
+			// if($tablenumber['tablenumber']){
+			// 	echo "I am Here";
+			// }
+			
 			if($tablenumber['tablenumber']){
 				
-				// $this->table->mark_Unused($tablenumber['tablenumber']);
-				// 	echo $this->db->last_query();
+				// print_r($this->table->mark_Unused($tablenumber['tablenumber']));
+					// echo $this->db->last_query();
 				if($this->table->mark_Unused($tablenumber['tablenumber'])){
 					$this->order->delete_by_id($_GET['order']);
 				}

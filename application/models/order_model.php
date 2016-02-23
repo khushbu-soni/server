@@ -143,7 +143,15 @@ class order_model extends CI_Model{
         }
 
         public function get_order_details(){
-            $query=$this->db->query("SELECT id,`date`,tablenumber,customername from `order` where status!=4 and payment_status=0");
+            $query=$this->db->query("SELECT 
+                                    `order`.id,
+                                    `order`.date,
+                                    `order`.tablenumber,
+                                    `order`.customername
+                                    FROM `order` JOIN `table`  on `table`.tablenumber=`order`.tablenumber
+                                    WHERE `order`.`status`!=4 AND `order`.payment_status=0 
+                                    AND `table`.inuse=1
+                    ");
             return $query->result_array();
         }
 
