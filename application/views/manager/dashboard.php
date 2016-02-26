@@ -137,7 +137,7 @@ padding-top: -20px;
                             $('#free_tables').html(data);
                     });
                
-                // console.clear();
+                console.clear();
                 }, <?php echo $free_table_auto_refresh_time;?>);
 
 

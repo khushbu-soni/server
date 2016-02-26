@@ -777,6 +777,13 @@ $query = $this->db->query("SELECT * from `order` where `key` = $key AND customer
         // echo $this->db->last_query();
     }
 
+    public function get_by_orderId($id){
+        $query=$this->db->query("Select * from `order` where id='".$id."'");
+         return $query->result_array();
+        // echo $this->db->last_query();
+    }
+
+
     public function delete_by_id($id){
         
         $query=$this->db->query("Delete From `order` where id=$id");

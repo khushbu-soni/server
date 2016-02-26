@@ -66,6 +66,30 @@ class orderitem_model extends CI_Model{
 
     }
 
+        public function update_order($order_id,$menu_id,$tablenumber=null,$qty=null,$price,$res_category){
+        // throw new Exception("Error Processing Request", 1);
+        
+         $data = array(
+            'menuid' =>$menu_id,
+            'orderid' =>$order_id,
+            'ingredients' =>'All',
+            'price'=>$price,
+            'table_no' => $tablenumber,
+            'quantity' => $qty,
+            'status'=>0,
+            'notes'=>$notes,
+            'el'=>$el,
+            'sl'=>$sl,
+            'res_category'=>$res_category
+        );
+            
+
+         
+        
+        return $this->db->insert('orderitem',$data);
+
+    }
+
     public function insert_orderitem($menuid,$orderid,$ingredients,$price,$quantity,$notes){
         $this->load->helper('url');
         

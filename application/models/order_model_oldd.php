@@ -302,9 +302,12 @@ class order_model extends CI_Model{
         $order_id =$this->db->insert_id();
         $this->session->set_userdata(array('order_id'=>$order_id));
         return $order_id;
-        
-        
     }
+     
+     function add_orderitems(orderid,menu_id){
+        
+     }   
+        
      public function insert_temp_order($waiter_id){
             // print_r($waiter_id);
             // exit();
