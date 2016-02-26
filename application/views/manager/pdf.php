@@ -61,7 +61,7 @@ foreach ($orders_details as $val) {
                     </div>
                         <div>
 
-                        <table  style="font-size:10px;width:260px;" >
+                        <table  style="font-size:10px;width:260px; " >
                         <tr>
                             <td colspan="3" style=" border-right: none;padding:0px;"><center><img  style="height: 60px;width:90px;margin-bottom:-7"  src="<?php echo base_url() . 'assets/dishes/logo.jpg' ?>" /></center></td>
                             <td colspan="" style=" border-left: none;"><center><img  style="height: 80px;width:110px;border-left:none;margin-bottom:-20"  src="<?php echo base_url() . 'assets/dishes/cafe1six.jpg' ?>" /></center></td>
@@ -76,7 +76,7 @@ foreach ($orders_details as $val) {
                         <tr>
                         
                             <td colspan="4"><center><?php echo $basic_info->address;?><br/></center>
-                                <center><p style="font-size:8px;"> P: <?php echo $basic_info->contact;?>&nbsp;W: www.biryanihouseuganda.com</p></center>
+                                <center><p style="font-size:8px;"> P: <?php echo $basic_info->contact;?>&nbsp;<span style="font-size:10px;">W: www.biryanihouseuganda.com</span></p></center>
                           </td>
                           
                         </tr>
@@ -144,12 +144,12 @@ foreach ($orders_details as $val) {
                         </tr>
                          <tr >
                            
-                            <td colspan="4" style="font-weight:bold;text-align:right">Cash Given <?php echo $cash_tendered;?>
+                            <td colspan="4" style="font-weight:bold;text-align:right">Cash Given : <?php echo $cash_tendered;?>
                             </td>
                         </tr>
                          <tr >
                             
-                            <td colspan="4" style="font-weight:bold;text-align:right">Change <?php echo $change;?></td>
+                            <td colspan="4" style="font-weight:bold;text-align:right">Change : <?php echo $change;?></td>
                         </tr>
                         
                         <tr>
