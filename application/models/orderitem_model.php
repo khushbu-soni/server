@@ -34,7 +34,7 @@ class orderitem_model extends CI_Model{
     // public function get_id()
 
     public function get_items($id){
-        $query=$this->db->query("SELECT menuitem.name,orderitem.quantity FROM
+        $query=$this->db->query("SELECT menuitem.item_no,menuitem.name,orderitem.quantity,orderitem.id,orderitem.notes,orderitem.orderid FROM
                 `order` JOIN orderitem ON `order`.id=orderitem.orderid
                 join menuitem on menuitem.id=orderitem.menuid
                 WHERE orderitem.orderid=$id
@@ -56,6 +56,30 @@ class orderitem_model extends CI_Model{
             'notes'=>$notes,
             'el'=>$el,
             'sl'=>$sl,
+            'res_category'=>$res_category
+        );
+            
+
+         
+        
+        return $this->db->insert('orderitem',$data);
+
+    }
+
+     public function update_order($order_id,$menu_id,$tablenumber=null,$qty=null,$price,$res_category){
+        // throw new Exception("Error Processing Request", 1);
+        
+         $data = array(
+            'menuid' =>$menu_id,
+            'orderid' =>$order_id,
+            'ingredients' =>'All',
+            'price'=>$price,
+            'table_no' => $tablenumber,
+            'quantity' => $qty,
+            'status'=>0,
+            'notes'=>'',
+            'el'=>'',
+            'sl'=>'',
             'res_category'=>$res_category
         );
             
@@ -108,6 +132,29 @@ class orderitem_model extends CI_Model{
             return TRUE;
         return FALSE; 
     }
+
+    public function update_qty($id,$qty){
+    $query=$this->db->query("update `orderitem` SET `quantity` =".$qty." 
+                        where id=".$id);
+        // $query = $this->db->get();
+            //         echo $this->db->last_query();
+            // exit();
+      if ($this->db->affected_rows() > 0)
+            return TRUE;
+        return FALSE;  
+    }
+
+     public function update_notes($id,$notes){
+    $query=$this->db->query("update `orderitem` SET `notes` ='".$notes."'  
+                        where id=".$id);
+        // $query = $this->db->get();
+            //         echo $this->db->last_query();
+            // exit();
+      if ($this->db->affected_rows() > 0)
+            return TRUE;
+        return FALSE;  
+    }
+
 
     public function insert_temp_orderitem()
     {
@@ -503,6 +550,14 @@ GROUP BY orderitem.menuid");
    public function delete_by_id($id){
    
         $query=$this->db->query("Delete  From `orderitem` where orderid=$id");
+         if ($this->db->affected_rows() > 0)
+            return 1;
+        return 0; 
+    } 
+
+   public function delete_by_item_id($id){
+   
+        $query=$this->db->query("Delete  From `orderitem` where id=$id");
          if ($this->db->affected_rows() > 0)
             return 1;
         return 0; 

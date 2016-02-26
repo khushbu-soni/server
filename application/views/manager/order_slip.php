@@ -43,7 +43,8 @@ foreach ($this->data['orders'] as $order) :?>
                                        
                                        <a class="btn btn-cyan btn-sm"  href="<?php echo site_url('manager/dashboard/dashboard_kot/' . $order['id']); ?>" target="_blank" >Kot</a>
                                        <?php if($order['tablenumber']!=0):?>
-                                       <button class="btn btn-danger btn-sm" attr="<?php echo $order['id'];?>" attrr="<?php echo $order['tablenumber'];?>"  id="add_modal_order_<?php echo $i;?>" data-toggle="modal" data-target="#myModal3">Add Order</button>
+                                       
+                                       <a class="btn btn-danger btn-sm"  href="<?php echo site_url('update?id=' . $order['id']); ?>" target="_blank" >Add Order</a>
                                        
                                        <?php endif;?>
                                        <a  onclick="delete_order(<?php echo $order['id'];?>)" target="_blank" class="btn btn-warning btn-sm" id="bill_modal_<?php echo $order['id'];?>" atrr="<?php echo $order['id'];?>">
