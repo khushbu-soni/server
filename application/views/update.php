@@ -40,11 +40,11 @@
 	    <div id="page-wrapper" >
             <div id="page-inner">
                 <div class="row">
-                    <div class="col-md-12 rounded-6px">
+                    <div class="col-md-12 rounded-6px" style='width: 100%;overflow-x: scroll;'>
 				<div class="panel panel-default">
 					<button type="button"  class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add More Items</button>
           <a type="button" target='_blank'  class="btn btn-info btn-lg"  href="<?php echo site_url('manager/dashboard/dashboard_kot/' . $order_id); ?>" >Print Kot</a>
-					<table class="table">
+					<table class="table" style="width:1198px; overflow:hidden;">
   <thead>
     <tr>
       <th>Item No</th>
