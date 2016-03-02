@@ -142,15 +142,21 @@ class order_model extends CI_Model{
         return $query->result();
         }
 
+        // public function get_order_details(){
+        //     $query=$this->db->query("SELECT 
+        //                             `order`.id,
+        //                             `order`.date,
+        //                             `order`.tablenumber,
+        //                             `order`.customername
+        //                             FROM `order` JOIN `table`  on `table`.tablenumber=`order`.tablenumber
+        //                             WHERE `order`.`status`!=4 AND `order`.payment_status=0 
+        //                             AND `table`.inuse=1
+        //             ");
+        //     return $query->result_array();
+        // }
+
         public function get_order_details(){
-            $query=$this->db->query("SELECT 
-                                    `order`.id,
-                                    `order`.date,
-                                    `order`.tablenumber,
-                                    `order`.customername
-                                    FROM `order` JOIN `table`  on `table`.tablenumber=`order`.tablenumber
-                                    WHERE `order`.`status`!=4 AND `order`.payment_status=0 
-                                    AND `table`.inuse=1
+            $query=$this->db->query(" SELECT `order`.id, `order`.date, `order`.tablenumber, `order`.customername FROM `order` where `order`.date=CURRENT_DATE()
                     ");
             return $query->result_array();
         }
