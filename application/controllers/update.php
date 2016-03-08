@@ -99,5 +99,38 @@ class Update extends CI_Controller {
 		}
 	}
 
-	
+	public function add_in_kot_print(){
+
+		print_r($_GET);
+
+		if(isset($_GET)){
+			$id=$_GET['id'];
+
+			$res=$this->orderitems->addInKotPrint($id);
+			// echo $this->db->last_query();
+			// print_r($res);
+			if($res)
+				echo 1;
+			else
+				echo 0;
+		}
+		exit();
+	}
+
+	function remove_from_kot_print(){
+		print_r($_GET);
+
+		if(isset($_GET)){
+			$id=$_GET['id'];
+
+			$res=$this->orderitems->removeFromKotPrint($id);
+			// echo $this->db->last_query();
+			// print_r($res);
+			if($res)
+				echo 1;
+			else
+				echo 0;
+		}
+		exit();
+	}
 }

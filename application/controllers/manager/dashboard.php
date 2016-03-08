@@ -84,6 +84,18 @@ class Dashboard extends CI_Controller {
 		$this->load->view('manager/dashboard_kot',$this->data['orders']);
 	}
 
+	public function dashboard_kot_update($order_id){
+
+		$order_id=$order_id;
+		// print_r($order_id);
+		// exit();
+		// echo $order_id;
+		// $this->load->vieq
+
+		$this->data['orders']=$this->orderitem->get_orderitems_info($order_id);
+		$this->load->view('manager/kot_updated',$this->data['orders']);
+	}
+
 	public function view_order(){
 		// print_r($_GET);
 		$id_array=array_keys($_GET);

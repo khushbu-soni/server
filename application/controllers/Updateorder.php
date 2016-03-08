@@ -38,6 +38,9 @@ class Update extends CI_Controller {
 		print_r($_GET);
 	}
 
+	public function add_in_kot_print(){
 
+		print_r($_GET);
+	}
 	
 }

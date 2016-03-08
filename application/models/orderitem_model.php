@@ -34,7 +34,7 @@ class orderitem_model extends CI_Model{
     // public function get_id()
 
     public function get_items($id){
-        $query=$this->db->query("SELECT menuitem.item_no,menuitem.name,orderitem.quantity,orderitem.id,orderitem.notes,orderitem.orderid FROM
+        $query=$this->db->query("SELECT menuitem.item_no,menuitem.name,orderitem.quantity,orderitem.id,orderitem.notes,orderitem.orderid,orderitem.isInKotPrint FROM
                 `order` JOIN orderitem ON `order`.id=orderitem.orderid
                 join menuitem on menuitem.id=orderitem.menuid
                 WHERE orderitem.orderid=$id
@@ -317,7 +317,7 @@ AND `order`.date=CURRENT_DATE()");
         $tax=$tax_info->tax;
         
         $query=$this->db->query("SELECT
-            ((SUM(orderitem.`price`)* orderitem.`quantity`)*$tax)/100 AS total FROM orderitem 
+            (SUM((orderitem.`price`)* (orderitem.`quantity`))*$tax)/100 AS total FROM orderitem 
                     JOIN `order` ON `order`.id = orderitem.orderid
                     WHERE
                      `order`.payment_status=0 and
@@ -335,7 +335,7 @@ AND `order`.date=CURRENT_DATE()");
         // print_r($tax_info);
         // exit();
         $query=$this->db->query("SELECT
-            (SUM(orderitem.`price`)*orderitem.`quantity`) AS total FROM orderitem 
+            (SUM((orderitem.`price`)*(orderitem.`quantity`))) AS total FROM orderitem 
                     JOIN `order` ON `order`.id = orderitem.orderid
                     WHERE
                      `order`.payment_status=0 and
@@ -403,6 +403,7 @@ AND `order`.date=CURRENT_DATE()");
     `order`.tablenumber,
     `order`.el,
     `order`.sl,
+    `orderitem`.isInKotPrint,
     staff.fname AS waiter_name
 FROM
     orderitem
@@ -410,10 +411,12 @@ JOIN `order` ON `order`.id = orderitem.orderid
 LEFT JOIN staff ON staff.id = `order`.waiter_id
 JOIN menuitem ON orderitem.menuid = menuitem.id
 WHERE
-    orderitem.orderid = ".$order_id."
+    orderitem.orderid = ".$order_id." AND `orderitem`.isInKotPrint=1
 GROUP BY orderitem.menuid");
         return $query->result_array();
     }
+
+
     
     public function get_orderitems_by_orderid(){
         $this->db->select('orderitem.price AS price, orderitem.id AS id, menuitem.name AS name');
@@ -563,5 +566,20 @@ GROUP BY orderitem.menuid");
         return 0; 
     } 
 
+    function addInKotPrint($id){
+        $query=$this->db->query("Update  `orderitem` set isInKotPrint=1 where id=$id");
+         if ($this->db->affected_rows() > 0)
+            return 1;
+        else
+            return 0;
+    }
+
+    function removeFromKotPrint($id){
+     $query=$this->db->query("Update  `orderitem` set isInKotPrint=0 where id=$id");
+         if ($this->db->affected_rows() > 0)
+            return 1;
+            else   
+            return 0;
+    }
 }
 ?>

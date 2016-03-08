@@ -156,7 +156,7 @@ class order_model extends CI_Model{
         // }
 
         public function get_order_details(){
-            $query=$this->db->query(" SELECT `order`.id, `order`.date, `order`.tablenumber, `order`.customername FROM `order` where `order`.date=CURRENT_DATE()
+            $query=$this->db->query(" SELECT `order`.id, `order`.date, `order`.tablenumber, `order`.customername FROM `order` 
                     ");
             return $query->result_array();
         }

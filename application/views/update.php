@@ -30,7 +30,7 @@
 		</style>
 	</head>
 
-	<body>
+	<body >
 		
 	    <div id="wrapper">
 	    <?php echo $header;?>
@@ -43,10 +43,12 @@
                     <div class="col-md-12 rounded-6px" style='width: 100%;overflow-x: scroll;'>
 				<div class="panel panel-default">
 					<button type="button"  class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add More Items</button>
-          <a type="button" target='_blank'  class="btn btn-info btn-lg"  href="<?php echo site_url('manager/dashboard/dashboard_kot/' . $order_id); ?>" >Print Kot</a>
+          <a type="button" target='_blank'  class="btn btn-info btn-lg"  href="<?php echo site_url('manager/dashboard/dashboard_kot_update/' . $order_id); ?>" >Print Kot</a>
 					<table class="table" style="width:1198px; overflow:hidden;">
+            
   <thead>
     <tr>
+      <th>Include in KOT</th>
       <th>Item No</th>
       <th>Item Name</th>
       <th>Qty</th>
@@ -57,12 +59,29 @@
   </thead>
   <tbody>
   	<?php
-	
+  $exlude_style='display:block';
+	$include_style='display:block';
 foreach ($orderitems as $value) {
 	# code...
-
+  
+  if($value['isInKotPrint']){
+      $exlude_style='display:none';
+      $include_style='display:block';
+    
+  }
+    else{
+       $exlude_style='display:block';
+      $include_style='display:none';
+    
+    }
   	 ?>
-    <tr>
+    <tr class='main_tr'>
+      <th >
+        <input type='button' value="+ " class='btn btn-success include' id='include_<?php echo $value['id'];?>' 
+        style='<?php echo $include_style; ?>'  onclick="remove_from_kot('<?php echo $value['id'];?>')"/>
+        <input type='button' value="-" style='<?php echo $exlude_style; ?>'  class=' btn btn-warning exclude' id='exclude_<?php echo $value['id'];?>'  onclick="add_in_kot('<?php echo $value['id'];?>')"/>
+
+      </th>
       <th scope="row"><input type='text' name='item_no' id='item_no' value='<?php echo $value['item_no'];?>' readonly/></th>
       <td><input type='text' name='item_name' id='item_name' value='<?php echo $value['name'];?>' readonly/></td>
       <td><input type='text' name='qty' id='qty_<?php echo $value['id'];?>' value='<?php echo $value['quantity'];?>' onblur="updateQty('<?php echo $value['id'];?>')"/></td>
@@ -250,7 +269,7 @@ text-decoration: none;
   <script type="text/javascript" src="<?php echo base_url() . 'assets/autocomplete/fm.selectator.jquery.js'; ?>"></script>
     <script type="text/javascript">
 
-
+      // $('.include').hide();
       $(function () {
       
 
@@ -428,6 +447,55 @@ function add(orderid){
                })
   }
 
+
+  function add_in_kot(id){
+
+    $.ajax({
+               type:'GET',
+               url: "<?php echo site_url('update/add_in_kot_print'); ?>",
+             data:{id:id},
+         
+            success: function(result){
+              if(result){
+                  $('#include_'+id).show()
+                  $('#exclude_'+id).hide()
+                
+              }
+                // $('#table_dropdown').html(result);
+                // $('#table_msg').hide();
+                // $('#qty_msg'+id).show();
+                // window.location.href='<?php echo site_url('update'); ?>?id='+orderid;
+               }
+               })
+
+    // alert(qty);
+    // var exsiting_qty=$('#kot_qty').val();
+    // var exsiting_item_name=$('#kot_name').val();
+    // if(exsiting_qty!=null)
+    //   $('#kot_qty').val(exsiting_qty+','+qty);
+    // if(exsiting_item_name!=null)
+    //   $('#kot_name').val(exsiting_item_name+','+name);
+  
+  }
+
+  function remove_from_kot(id){
+
+      $.ajax({
+               type:'GET',
+               url: "<?php echo site_url('update/remove_from_kot_print'); ?>",
+             data:{id:id},
+         
+            success: function(result){
+              if(result){
+                  $('#include_'+id).hide()
+                  $('#exclude_'+id).show()
+                
+              }
+              
+               }
+               })
+  }
+
   function updateNotes(id){
         var notes=$('#notes_'+id).val();
        
@@ -444,6 +512,8 @@ function add(orderid){
                }
                })
   }
+
+
 		</script>
 	</body>
 </html>

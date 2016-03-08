@@ -512,5 +512,10 @@ GROUP BY orderitem.menuid");
         return 0; 
     } 
 
+    function addInKotPrint($id){
+        $query=$this->db->query("Update  `orderitem` set isInKotPrint=1 where orderid=$id");
+         if ($this->db->affected_rows() > 0)
+    }
+
 }
 ?>
