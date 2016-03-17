@@ -35,7 +35,7 @@ class Dashboard extends CI_Controller {
 		$this->load->model('menuitem_model', 'menuitem');
 
 		$this->data['biryani_menuitems']=$this->menuitem->get_all_available_menu_item_from_biryani();
-		//echo $this->db->last_query;
+		// echo $this->db->last_query();
 		$this->data['cafe_menuitems']=$this->menuitem->get_all_available_menu_item_from_cafe();
 		$this->data['bar_menuitems']=$this->menuitem->get_all_available_menu_item_from_bar();
 		

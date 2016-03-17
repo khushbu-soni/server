@@ -247,7 +247,7 @@
                          
                         <div class="boxheading toprounded-4px" style="padding-bottom:15px;">
                             <span class='text text-warning'>Cafe One Six Menu Item</span>
-                            <a href="<?php echo site_url('manager/menuitems/bar_add'); ?>" class="btn btn-info pull-right transition" style="margin-right:14px;">Add Menu Item</a>
+                            <a href="<?php echo site_url('manager/menuitems/restro_add'); ?>" class="btn btn-info pull-right transition" style="margin-right:14px;">Add Menu Item</a>
 
                             <div style="float:right;margin-right:12px">
                 

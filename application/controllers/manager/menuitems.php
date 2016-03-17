@@ -62,7 +62,8 @@ class MenuItems extends CI_Controller {
 			$ingredients = implode(',',$_POST['ingredients']);
 		else
 			$ingredients = "";
-
+		if(isset($_POST['res_category']))
+			$res_category=$_POST['res_category'];
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('name', 'name', 'required');
@@ -81,7 +82,7 @@ class MenuItems extends CI_Controller {
 			$this->load->view('manager/addmenuitem', $this->data);
 		} else {
 			//insert the menu item into the database
-			$menuitemid = $this->menuitems->insert_menuitem($ingredients,'restro');
+			$menuitemid = $this->menuitems->insert_menuitem($ingredients,'restro',$res_category);
 			//insert ingredients
 			if (trim($this->input->post('ingredients')) != ''){
 				//there are optional ingredients

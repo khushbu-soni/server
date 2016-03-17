@@ -81,7 +81,7 @@ class menuitem_model extends CI_Model{
     //add menuitem
     //Note that since we can add the duplicate items,
     //We don't check to see if there any duplicate
-    public function insert_menuitem($ingredients,$category){
+    public function insert_menuitem($ingredients,$category,$res_category){
         $data = array(
             'price' => $this->input->post('price'),
             'name' =>$this->input->post('name'),
@@ -93,7 +93,7 @@ class menuitem_model extends CI_Model{
             'item_id' => $this->input->post('type'),
             'category'=>$category,
             'item_no'=>$this->input->post('item_no'),
-            'res_category'=>$category,
+            'res_category'=>$res_category,
           
         );
 
