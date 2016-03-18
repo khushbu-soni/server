@@ -249,7 +249,7 @@ WHERE
 AND `table`.inuse = 1
 AND orderitem.`status`=0
 
-AND `order`.date=CURRENT_DATE()
+
 "); 
         return $query->row_array();
     }
