@@ -157,7 +157,7 @@
                             <input name='customername' id="customername" type="hidden" value="<?php echo $customername['customername']?>" />
                             <tr><td><?php echo $val->name ;?></td>
                                 <td class="text-center"><?php echo $basic_info->currency."".$val->actual_price." x ".$val->quantity ;?></td>
-                                <td class="text-center"><?php echo $val->price ;?></td>
+                                <td class="text-center"><?php echo $val->price*$val->quantity ;?></td>
                             </tr>
                         <?php endforeach; ?>
                         <tr>
